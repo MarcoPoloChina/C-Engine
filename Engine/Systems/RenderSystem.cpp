@@ -11,7 +11,7 @@ int RenderSystem::addSprite(std::string name){
 	 return _currentSprites.size()-1;
 }
 void RenderSystem::update(){
-	for(int i=0;i<_currentSprites.size();i++){
+	for(unsigned int i=0;i<_currentSprites.size();i++){
 		//draw each sprites	
 	}
 }

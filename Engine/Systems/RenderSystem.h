@@ -1,8 +1,8 @@
 #ifndef RENDER_SYSTEM_H
 #define RENDER_SYSTEM_H
-#include "Tools.h"
-#include "Sprite.h"
-#include "AssetManager.h"
+#include "../Tools.h"
+#include "../Components/Sprite.h"
+#include "../AssetManager/AssetManager.h"
 class RenderSystem{
 	public:
 		RenderSystem(AssetManager* assetManager);
