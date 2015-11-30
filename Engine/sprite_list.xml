@@ -1,0 +1,5 @@
+<sprite_list>
+	<sprite name="test_sprite" x="0" y="0">
+		<animation>test_animation</animation>
+	</sprite>
+</sprite_list>
