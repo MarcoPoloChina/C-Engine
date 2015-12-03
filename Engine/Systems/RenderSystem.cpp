@@ -4,7 +4,6 @@ RenderSystem::RenderSystem(AssetManager* assetManager){
 	init();
 }
 void RenderSystem::init(){
-	_sprites = assetManagerPtr->loadSprites(assetManagerPtr->loadSpriteSheets());	
 }
 int RenderSystem::addSprite(std::string name){
 	 _currentSprites.push_back(_sprites.at(name));

@@ -3,14 +3,20 @@ AssetManager::AssetManager(){
 	init();
 }
 void AssetManager::init(){
+	//loads all of the assets
 	loadAssetsDirectory();
-	loadSprites(loadSpriteSheets());
+	loadSpriteSheets();
+	loadSprites();
 }
 void AssetManager::loadAssetsDirectory(){
+	//parse the assets.xml
 	rapidxml::xml_document<> doc;
 	doc.parse<0>(Tools::loadFile("Assets/assets.xml"));
+	//loop over each asset path
 	for(rapidxml::xml_node<>* node = doc.first_node()->first_node();node != NULL;node = node->next_sibling()){
+		//loop over each path's attributes
 		for(rapidxml::xml_attribute<>* attr = node->first_attribute();attr !=NULL;attr = attr->next_attribute()){
+			//determine the type of the path and then push the path to the apportivate vector 
 			std::string test_attr = std::string(attr->name(),attr->name_size());
 			if(test_attr.compare("type") == 0){
 				std::string type(attr->value(),attr->value_size());
@@ -44,7 +50,10 @@ void AssetManager::loadAssetsDirectory(){
 		}
 	}	
 }
-std::vector<Animation> AssetManager::loadSpriteSheets(){		
+/**
+ * @brief Loads the sprits sheets into the _animationsMap
+ */
+void AssetManager::loadSpriteSheets(){		
 	//Loop over all of the sprite sheets
 	for(unsigned int i=0;i<_assets[AssetType_SPRITE_SHEET].size();i++){
 		//load the xml doc
@@ -89,16 +98,7 @@ std::vector<Animation> AssetManager::loadSpriteSheets(){
 				}else
 				if(test_attr.compare("source") == 0){
 					std::string test_string = std::string(attr->value(),attr->value_size());
-					std::unordered_map<std::string, int>::const_iterator texture_map_itr = _textureMap.indexes.find(test_string);
-					//check if the source texture has been mapped
-					if(texture_map_itr == _textureMap.indexes.end()){
-						int index = _textureMap.texturesSources.size();
-						_textureMap.indexes.insert({test_string,index});
-						temp_animation.source = index;
-						_textureMap.texturesSources.push_back(test_string);
-					}else{
-						temp_animation.source = texture_map_itr->second;
-					}
+					_textureMap.addObject(test_string,test_string);
 				}else
 				if(test_attr.compare("repeating") == 0){
 					std::string temp_value(attr->value(),attr->value_size());
@@ -110,39 +110,36 @@ std::vector<Animation> AssetManager::loadSpriteSheets(){
 				}
 			}
 			//check if the animation has been mapped
-			std::unordered_map<std::string, int>::const_iterator animation_map_itr = _animationMap.indexes.find(temp_animation.name);
-			if(animation_map_itr == _animationMap.indexes.end()){
-				int index = _animationMap.animations.size();
-				_animationMap.indexes.insert({temp_animation.name,index});
-				temp_animation.index = index;
-			}
+			_animationMap.addObject(temp_animation.name,temp_animation);
 		}
 	}
 	//Generate a TextureMap based on all of the sprite_sheets sources
 	//Loop over all of the 
 	
-	return _animationMap.animations;
 }
-std::vector<Sprite> AssetManager::loadSprites(std::vector<Animation> animations){
+/**
+ * @brief loads the sprites from the sprite lists using the _animationsMap to populate the _spritesMap
+ */
+void AssetManager::loadSprites(){
 	for(unsigned int i=0;i<_assets[AssetType_SPRITE_LIST].size();i++){
 		rapidxml::xml_document<>  doc;
 		doc.parse<0>(Tools::loadFile(_assets[AssetType_SPRITE_LIST][i]));
 		for(rapidxml::xml_node<>* node = doc.first_node()->first_node(); node != NULL;node = node->next_sibling()){
-			std::unordered_map<std::string, Animation> temp_animations;
+			std::vector<Animation> temp_animations;
 			for(rapidxml::xml_node<>* nodei = node->first_node();nodei != NULL;nodei = nodei->next_sibling()){
 				std::string test_string(nodei->value(),nodei->value_size());
-				std::unordered_map<std::string,Animation>::const_iterator animation_itr = animations.find(test_string);				
-				if(animation_itr == animations.end()){
+				int test_index = _animationMap.checkObject(test_string);
+				if(test_index == -1){
 					std::cout << "Error Animation: " << test_string << " not found"	<< std::endl;
 				}else{
-					temp_animations.insert({test_string,animations.at(test_string)});	
+					temp_animations.push_back(_animationMap.getObjectVector()[test_index]);	
 				}
 			}
 			std::string name;
 			int x;
 			int y;
 			double rotation;
-			std::string defaultAnimation;
+			int defaultAnimation;
 			for(rapidxml::xml_attribute<>* attr = node->first_attribute();attr != NULL;attr = attr->next_attribute()){
 				std::string test_attr(attr->name(),attr->name_size());
 				if(test_attr.compare("name") == 0){	
@@ -158,14 +155,13 @@ std::vector<Sprite> AssetManager::loadSprites(std::vector<Animation> animations)
 					rotation  = atof(attr->value());
 				}else
 				if(test_attr.compare("defaultAnimation") == 0){	
-					defaultAnimation  = std::string(attr->value(),attr->value_size());
+					defaultAnimation  = atoi(attr->value());
 				}else{
 					std::cout << "Error wrong attribute for animation" << std::endl;	
 				}
 			}
 			Sprite temp_sprite(temp_animations,name,Transform(Vector2d(x,y),rotation),defaultAnimation);
-			sprites.insert({temp_sprite.getName(),temp_sprite});
+			_spriteMap.addObject(name,temp_sprite);
 		}
 	}
-	return sprites;
 }
