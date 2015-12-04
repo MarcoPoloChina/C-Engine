@@ -1,6 +1,4 @@
-#include <iostream>
-#include "AssetManager/AssetManager.h"
+#include "Engine.h"
 int main(int argc, char *argv[]){
-	std::cout <<"Hello" << std::endl;
-	AssetManager* assets = new AssetManager();
+	Engine e;
 }

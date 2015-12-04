@@ -20,6 +20,8 @@ class AssetManager{
 		AssetManager();
 		void loadSpriteSheets();
 		void loadSprites();
+		std::vector<Sprite> getSprites(){return _spriteMap.getObjectVector();}
+		int lookUpSprite(std::string identifier){return _spriteMap.checkObject(identifier);}
 	private:
 		void init();
 		void loadAssetsDirectory();

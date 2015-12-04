@@ -28,12 +28,15 @@ class SDLManager{
 		void setWindowPosX(int x);
 		void setWIndowPosY(int y);
 		void setWindowName(std::string name);
+		void update();
 	private:
 		void init();		
 		void destroy();
 		SDL_Window* _window;
+		SDL_Surface* _screenSurface;
 		Settings _windowSettings;
 		bool _reloaded;
+		
 
 };
 #endif

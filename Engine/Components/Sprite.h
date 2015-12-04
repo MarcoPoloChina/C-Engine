@@ -16,6 +16,7 @@ struct Frame{
 };
 struct Animation{
 	Animation(std::vector<Frame> frames, int source=0,int speed=0, bool repeating=false, int index=0,std::string name=""): frames(frames), source(source),speed(speed), repeating(repeating), index(index),currentFrame(0),name(name) {}
+	void draw();
 	std::vector<Frame> frames;
 	int source;
 	int speed;
@@ -28,7 +29,7 @@ class Sprite{
 	public:
 		Sprite(std::vector<Animation> animations,std::string name="",Transform transform=Transform(),int defaultAnimation=0): _animations(animations), _name(name), _transform(transform),_defaultAnimation(defaultAnimation){setCurrentAnimation(defaultAnimation);}
 		std::string getName() {return _name;}
-		int getCurrentAnimation() {return _currentAnimation;}
+		Animation* getCurrentAnimation() {return &_animations[_currentAnimation];}
 		void setCurrentAnimation(unsigned int index);
 	private:
 		std::vector<Animation> _animations;

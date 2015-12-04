@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include "Status.h"
 class Tools{
 	public:
 		static int genId();

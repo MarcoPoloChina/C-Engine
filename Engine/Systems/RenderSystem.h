@@ -8,11 +8,11 @@ class RenderSystem{
 		RenderSystem(AssetManager* assetManager);
 		void update();
 		void init();
+		int addSprite(int index);
 		int addSprite(std::string name);
 	private:
 		AssetManager* assetManagerPtr;
-		std::unordered_map<std::string,Sprite> _sprites;
+		std::vector<Sprite> _sprites;
 		std::vector<Sprite> _currentSprites;
-		std::vector<Animation> _animations;
 };
 #endif

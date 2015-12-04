@@ -7,6 +7,7 @@ class Map{
 		std::vector<t> getObjectVector();
 		int addObject(std::string identifier,t object);
 		int checkObject(std::string identifier);
+	private:
 		std::unordered_map<std::string,int> _indexes;
 		std::vector<t> _objects;
 };
