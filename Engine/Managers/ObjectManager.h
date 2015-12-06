@@ -1,17 +1,13 @@
 #ifndef OBJECT_MANAGER_H
 #define OBJECT_MANAGER_H
 #include "../Tools.h"
+#include "../Messanger.h"
+#include "Manager.h"
 enum class ComponentType{
 	Sprite,
 	Logic,
 	Physics,
 	Input
-};
-struct Component {
-	Component(int index,ComponentType type,std::string componentName=""): index(index), type(type),componentName(componentName){}
-	int index;	
-	ComponentType type;
-	std::string componentName;
 };
 struct ComponentPrefab {
 	ComponentPrefab(ComponentType type,std::string componentName=""):type(type),componentName(componentName){}
@@ -20,29 +16,27 @@ struct ComponentPrefab {
 };
 class Object {	
 	public:
-		Object(std::vector<Component> components,std::string prefabName):_components(components), _prefabName(prefabName){}
+		Object(std::vector<ID> ids,std::string prefabName):_objectId(_objectCounter++),_ids(ids), _prefabName(prefabName){}
 		std::string getName(){return _prefabName;}
-		Component getComponent(int index){return _components[index];}
+		ID getComponent(int index){return _ids[index];}
 	private:
-		std::vector<Component> _components;
+		int _objectId;
+		static int _objectCounter;
+		std::vector<ID> _ids;
 		std::string _prefabName;	
 };
-class Prefab {
+struct Prefab {
 	public:
 		Prefab(std::string name,std::vector<ComponentPrefab> componentPrefabs):_name(name),_componentPrefabs(componentPrefabs){}
-		Object generateObject();
-	private:
 		std::string _name;
 		std::vector<ComponentPrefab> _componentPrefabs;
 };
-class ObjectManager{
+class ObjectManager: public Manager{
 	public:
-		ObjectManager();
-		Object* getObject(int index){return &_objects[index];}
-		int genObject(std::string name);
+		ObjectManager(AssetManager* assetManagerPtr,RenderSystem* renderSystemPtr):Manager(assetManagerPtr,renderSystemPtr){}
+		Prefab getPrefab(std::string name);
 	private:
 		void init();
-		std::vector<Object> _objects;
 		std::unordered_map<std::string,Prefab> _prefabs;
 };
 #endif

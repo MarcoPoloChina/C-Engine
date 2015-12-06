@@ -3,15 +3,17 @@
 #include "../Tools.h"
 #include "../Components/Sprite.h"
 #include "../AssetManager/AssetManager.h"
-class RenderSystem{
+#include "../Messanger.h"
+#include "System.h"
+class RenderSystem: public System {
 	public:
-		RenderSystem(AssetManager* assetManager);
-		void update();
+		RenderSystem(AssetManager* assetManager):System(assetManager){init();}
+		virtual void internalUpdate(double dt);
 		void init();
-		int addSprite(int index);
-		int addSprite(std::string name);
+		virtual void internalAdd(int indexOfRefrence,int index);
+		virtual void internalAdd(std::string name,int index);
+		virtual void internalRemove(int intdex);
 	private:
-		AssetManager* assetManagerPtr;
 		std::vector<Sprite> _sprites;
 		std::vector<Sprite> _currentSprites;
 };

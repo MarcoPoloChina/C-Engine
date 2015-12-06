@@ -2,4 +2,5 @@
 <assets>
 	<sprite_sheet type="sprite_sheet">sprite_sheet.xml</sprite_sheet>
 	<sprites type="sprite_list">sprite_list.xml</settings>
+	<objects type="prefab_list">prefab.xml</objects>
 </assets>

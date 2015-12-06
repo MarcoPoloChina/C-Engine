@@ -27,15 +27,17 @@ struct Animation{
 };
 class Sprite{ 
 	public:
-		Sprite(std::vector<Animation> animations,std::string name="",Transform transform=Transform(),int defaultAnimation=0): _animations(animations), _name(name), _transform(transform),_defaultAnimation(defaultAnimation){setCurrentAnimation(defaultAnimation);}
+		Sprite(std::vector<Animation> animations,std::string name="",Transform transform=Transform(),int defaultAnimation=0,int layer=0):active(true),_animations(animations), _name(name), _transform(transform),_defaultAnimation(defaultAnimation),_layer(layer){setCurrentAnimation(defaultAnimation);}
 		std::string getName() {return _name;}
 		Animation* getCurrentAnimation() {return &_animations[_currentAnimation];}
 		void setCurrentAnimation(unsigned int index);
+		bool active;
 	private:
 		std::vector<Animation> _animations;
 		std::string _name;
 		Transform _transform;
 		int _defaultAnimation;
 		int _currentAnimation;
+		int _layer;
 };
 #endif

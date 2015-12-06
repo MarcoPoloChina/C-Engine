@@ -140,6 +140,7 @@ void AssetManager::loadSprites(){
 			int y;
 			double rotation;
 			int defaultAnimation;
+			int layer;
 			for(rapidxml::xml_attribute<>* attr = node->first_attribute();attr != NULL;attr = attr->next_attribute()){
 				std::string test_attr(attr->name(),attr->name_size());
 				if(test_attr.compare("name") == 0){	
@@ -154,13 +155,16 @@ void AssetManager::loadSprites(){
 				if(test_attr.compare("rotation") == 0){	
 					rotation  = atof(attr->value());
 				}else
+				if(test_attr.compare("layer") == 0){	
+					layer = atoi(attr->value());
+				}else
 				if(test_attr.compare("defaultAnimation") == 0){	
 					defaultAnimation  = atoi(attr->value());
 				}else{
 					std::cout << "Error wrong attribute for animation" << std::endl;	
 				}
 			}
-			Sprite temp_sprite(temp_animations,name,Transform(Vector2d(x,y),rotation),defaultAnimation);
+			Sprite temp_sprite(temp_animations,name,Transform(Vector2d(x,y),rotation),defaultAnimation,layer);
 			_spriteMap.addObject(name,temp_sprite);
 		}
 	}

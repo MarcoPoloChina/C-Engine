@@ -1,4 +1,2 @@
 #include "ObjectManager.h"	
-Object Prefab::generateObject(){
-	
-}
+int Object::_objectCounter =0;
