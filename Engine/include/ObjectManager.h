@@ -1,7 +1,7 @@
 #ifndef OBJECT_MANAGER_H
 #define OBJECT_MANAGER_H
-#include "../Tools.h"
-#include "../Messanger.h"
+#include "Tools.h"
+#include "Messanger.h"
 #include "Manager.h"
 enum class ComponentType{
 	Sprite,

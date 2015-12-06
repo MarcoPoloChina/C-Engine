@@ -1,6 +1,6 @@
 #ifndef SDL_MANAGER_H
 #define SDL_MANAGER_H
-#include "../Tools.h"
+#include "Tools.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 struct Settings{

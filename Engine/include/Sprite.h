@@ -1,7 +1,7 @@
 #ifndef SPRITE__H
 #define SPRITE__H
 #include "Transform.h"
-#include "../Tools.h"
+#include "Tools.h"
 struct Texture{
 	Texture(int index,std::string path):index(index),path(path){}
 	int index;

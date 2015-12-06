@@ -1,8 +1,8 @@
 #ifndef ENGINE_H
 #define ENGINE_H
-#include "AssetManager/AssetManager.h"
-#include "Systems/RenderSystem.h"
-#include "SDLManager/SDLManager.h"
+#include "AssetManager.h"
+#include "RenderSystem.h"
+#include "SDLManager.h"
 #include "Status.h"
 class Engine{
 	public:

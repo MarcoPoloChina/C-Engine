@@ -1,7 +1,7 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
-#include "../Messanger.h"
-#include "../AssetManager/AssetManager.h"
+#include "Messanger.h"
+#include "AssetManager.h"
 #include <list>
 class System {
 	public:

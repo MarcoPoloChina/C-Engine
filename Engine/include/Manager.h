@@ -1,7 +1,7 @@
 #ifndef MANAGER_H
 #define MANAGER_H
-#include "../AssetManager/AssetManager.h"
-#include "../Systems/RenderSystem.h"
+#include "AssetManager.h"
+#include "RenderSystem.h"
 class Manager{
 	public:
 		Manager(AssetManager* assetManagerPtr,RenderSystem* renderSystemPtr):_assetManagerPtr(assetManagerPtr),_renderSystemPtr(renderSystemPtr){}

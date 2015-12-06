@@ -1,10 +1,9 @@
 #ifndef ASSET_MANAGER_H
 #define ASSET_MANAGER_H
-#include "../Components/Sprite.h"
-#include "../Tools.h"
-#include "../Map.h"
-#include "../rapidxml-1.13/rapidxml.hpp"
-#include "../Managers/ObjectManager.h"
+#include "Sprite.h"
+#include "Tools.h"
+#include "Map.h"
+#include "rapidxml-1.13/rapidxml.hpp"
 #include <stdlib.h>
 #include <string.h>
 enum  AssetTypes{	
@@ -33,6 +32,5 @@ class AssetManager{
 		Map<std::string> _textureMap;
 		Map<Animation> _animationMap;
 		Map<Sprite> _spriteMap;
-		Map<Prefab> _prefabMap;
 };
 #endif

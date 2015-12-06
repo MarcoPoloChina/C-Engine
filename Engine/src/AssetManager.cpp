@@ -11,7 +11,7 @@ void AssetManager::init(){
 void AssetManager::loadAssetsDirectory(){
 	//parse the assets.xml
 	rapidxml::xml_document<> doc;
-	doc.parse<0>(Tools::loadFile("Assets/assets.xml"));
+	doc.parse<0>(Tools::loadFile("../Assets/assets.xml"));
 	//loop over each asset path
 	for(rapidxml::xml_node<>* node = doc.first_node()->first_node();node != NULL;node = node->next_sibling()){
 		//loop over each path's attributes
@@ -22,7 +22,7 @@ void AssetManager::loadAssetsDirectory(){
 				std::string type(attr->value(),attr->value_size());
 				if(type.compare("sprite_sheet") == 0){					
 					char* path = node->value();
-					std::string default_path = "Assets/";
+					std::string default_path = "../Assets/";
 					char* path_fixed = (char*) malloc(strlen(path)+strlen(default_path.c_str())+1);
 					strcpy(path_fixed,default_path.c_str());
 					strcat(path_fixed,path);
@@ -30,7 +30,7 @@ void AssetManager::loadAssetsDirectory(){
 				}else 
 				if(type.compare("settings") == 0){
 					char* path = node->value();
-					std::string default_path = "Assets/";
+					std::string default_path = "../Assets/";
 					char* path_fixed = (char*) malloc(strlen(path)+strlen(default_path.c_str())+1);
 					strcpy(path_fixed,default_path.c_str());
 					strcat(path_fixed,path);
@@ -38,7 +38,7 @@ void AssetManager::loadAssetsDirectory(){
 				}else
 				if(type.compare("sprite_list") == 0){
 					char* path = node->value();
-					std::string default_path = "Assets/";
+					std::string default_path = "../Assets/";
 					char* path_fixed = (char*) malloc(strlen(path)+strlen(default_path.c_str())+1);
 					strcpy(path_fixed,default_path.c_str());
 					strcat(path_fixed,path);

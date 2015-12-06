@@ -1,9 +1,9 @@
 #ifndef RENDER_SYSTEM_H
 #define RENDER_SYSTEM_H
-#include "../Tools.h"
-#include "../Components/Sprite.h"
-#include "../AssetManager/AssetManager.h"
-#include "../Messanger.h"
+#include "Tools.h"
+#include "Sprite.h"
+#include "AssetManager.h"
+#include "Messanger.h"
 #include "System.h"
 class RenderSystem: public System {
 	public:
