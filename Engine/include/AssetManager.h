@@ -33,6 +33,9 @@ class AssetManager{
 		int lookUpSprite(std::string identifier){return _spriteMap.checkObject(identifier);}
 		int lookUpPrefab(std::string identifier){return _prefabs.checkObject(identifier);}
 		int lookUpScenePrefab(std::string identifier){return _scenePrefabs.checkObject(identifier);}
+		Sprite getSprite(int index){return _spriteMap.getObject(index);}
+		Prefab getPrefab(int index){return _prefabs.getObject(index);}
+		ScenePrefab getScenePrefab(int index){return _scenePrefabs.getObject(index);}
 	private:
 		void init();
 		void loadAssetsDirectory();

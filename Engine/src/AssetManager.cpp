@@ -231,13 +231,13 @@ void AssetManager::loadScenePrefabs(){
 		rapidxml::xml_document<> doc;
 		doc.parse<0>(Tools::loadFile(_assets[AssetType_SCENE_PREFAB_LIST][i]));
 		for(rapidxml::xml_node<>* node = doc.first_node()->first_node(); node != NULL; node = node->next_sibling()){
-			std::vector<Prefab> temp_prefabs;
+			std::vector<std::string> temp_prefabs;
 			for(rapidxml::xml_node<>* nodei = node->first_node()->first_node();nodei != NULL; nodei = nodei->next_sibling()){
-				int test_index =  _prefabs.checkObject(std::string(nodei->value(),nodei->value_size()));
-				if(test_index == -1){
+				std::string prefab_name(nodei->value(),nodei->value_size());
+				if(_prefabs.checkObject(prefab_name) == -1){
 					std::cout << "Error Prefab not found" << std::endl;
 				}else{
-					temp_prefabs.push_back(_prefabs.getObject(test_index));
+					temp_prefabs.push_back(prefab_name);
 				}
 			}
 			std::string scene_name;

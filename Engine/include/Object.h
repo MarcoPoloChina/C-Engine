@@ -25,8 +25,8 @@ class Object {
 };
 struct Prefab {
 	public:
-		Prefab(std::string name,std::vector<ComponentPrefab> componentPrefabs):_name(name),_componentPrefabs(componentPrefabs){}
-		std::string _name;
-		std::vector<ComponentPrefab> _componentPrefabs;
+		Prefab(std::string name,std::vector<ComponentPrefab> componentPrefabs):name(name),componentPrefabs(componentPrefabs){}
+		std::string name;
+		std::vector<ComponentPrefab> componentPrefabs;
 };
 #endif

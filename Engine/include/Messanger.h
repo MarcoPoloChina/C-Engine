@@ -3,7 +3,7 @@
 #include "Tools.h"
 struct ID{
 	public:
-		ID(int systemIndex,int index):systemIndex(systemIndex),index(index){}
+		ID(int systemIndex=0,int index=0):systemIndex(systemIndex),index(index){}
 		int systemIndex;
 		int index;
 		int type;
