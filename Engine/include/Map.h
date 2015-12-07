@@ -7,6 +7,12 @@ class Map{
 		std::vector<t> getObjectVector(){
 			return _objects;
 		}
+		t getObject(int index){
+			if(index >= _objects.size()){
+				std::cout << "Error out of range" << std::endl;
+			}
+			return _objects[index];
+		}
 		int addObject(std::string identifier,t object){
 			std::unordered_map<std::string, int>::const_iterator index_itr = _indexes.find(identifier);
 			if(index_itr == _indexes.end()){
@@ -17,7 +23,6 @@ class Map{
 			}
 			return index_itr->second;
 		}
-
 		int checkObject(std::string identifier){
 			std::unordered_map<std::string, int>::const_iterator index_itr = _indexes.find(identifier);
 			if(index_itr == _indexes.end()){

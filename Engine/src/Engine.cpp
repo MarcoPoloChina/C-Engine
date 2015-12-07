@@ -11,7 +11,7 @@ void Engine::gameLoop(){
 }
 void Engine::init(){
 	Status::running = true;
-	gameLoop();
+//	gameLoop();
 }
 
 

@@ -1,8 +1,10 @@
 #ifndef ASSET_MANAGER_H
 #define ASSET_MANAGER_H
 #include "Sprite.h"
+#include "Object.h"
 #include "Tools.h"
 #include "Map.h"
+#include "Scene.h"
 #include "rapidxml-1.13/rapidxml.hpp"
 #include <stdlib.h>
 #include <string.h>
@@ -11,6 +13,7 @@ enum  AssetTypes{
 	AssetType_SETTINGS,
 	AssetType_SPRITE_LIST,
 	AssetType_PREFAB_LIST,
+	AssetType_SCENE_PREFAB_LIST,
 	AssetType_TOP
 };
 struct Asset{
@@ -23,8 +26,13 @@ class AssetManager{
 		void loadSprites();
 		void addLogic();
 		void loadPrefabs();
+		void loadScenePrefabs();
 		std::vector<Sprite> getSprites(){return _spriteMap.getObjectVector();}
+		std::vector<Prefab> getPrefabs(){return _prefabs.getObjectVector();}
+		std::vector<ScenePrefab> getScenePrefabs(){return _scenePrefabs.getObjectVector();}
 		int lookUpSprite(std::string identifier){return _spriteMap.checkObject(identifier);}
+		int lookUpPrefab(std::string identifier){return _prefabs.checkObject(identifier);}
+		int lookUpScenePrefab(std::string identifier){return _scenePrefabs.checkObject(identifier);}
 	private:
 		void init();
 		void loadAssetsDirectory();
@@ -32,5 +40,7 @@ class AssetManager{
 		Map<std::string> _textureMap;
 		Map<Animation> _animationMap;
 		Map<Sprite> _spriteMap;
+		Map<Prefab> _prefabs;
+		Map<ScenePrefab> _scenePrefabs;
 };
 #endif

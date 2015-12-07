@@ -7,6 +7,8 @@ void AssetManager::init(){
 	loadAssetsDirectory();
 	loadSpriteSheets();
 	loadSprites();
+	loadPrefabs();
+	loadScenePrefabs();
 }
 void AssetManager::loadAssetsDirectory(){
 	//parse the assets.xml
@@ -43,6 +45,22 @@ void AssetManager::loadAssetsDirectory(){
 					strcpy(path_fixed,default_path.c_str());
 					strcat(path_fixed,path);
 					_assets[AssetType_SPRITE_LIST].push_back(path_fixed);
+				}else
+				if(type.compare("prefab_list") == 0){
+					char* path = node->value();
+					std::string default_path = "../Assets/";
+					char* path_fixed = (char*) malloc(strlen(path)+strlen(default_path.c_str())+1);
+					strcpy(path_fixed,default_path.c_str());
+					strcat(path_fixed,path);
+					_assets[AssetType_PREFAB_LIST].push_back(path_fixed);
+				}else
+				if(type.compare("scene_prefab_list") == 0){
+					char* path = node->value();
+					std::string default_path = "../Assets/";
+					char* path_fixed = (char*) malloc(strlen(path)+strlen(default_path.c_str())+1);
+					strcpy(path_fixed,default_path.c_str());
+					strcat(path_fixed,path);
+					_assets[AssetType_SCENE_PREFAB_LIST].push_back(path_fixed);
 				}
 			}else{
 				std::cout << "Error wrong asset dictory format attribute" << std::endl;
@@ -132,7 +150,7 @@ void AssetManager::loadSprites(){
 				if(test_index == -1){
 					std::cout << "Error Animation: " << test_string << " not found"	<< std::endl;
 				}else{
-					temp_animations.push_back(_animationMap.getObjectVector()[test_index]);	
+					temp_animations.push_back(_animationMap.getObject(test_index));	
 				}
 			}
 			std::string name;
@@ -166,6 +184,74 @@ void AssetManager::loadSprites(){
 			}
 			Sprite temp_sprite(temp_animations,name,Transform(Vector2d(x,y),rotation),defaultAnimation,layer);
 			_spriteMap.addObject(name,temp_sprite);
+		}
+	}
+}
+void AssetManager::loadPrefabs(){
+	for(unsigned int i=0;i<_assets[AssetType_PREFAB_LIST].size();i++){
+		rapidxml::xml_document<> doc;
+		doc.parse<0>(Tools::loadFile(_assets[AssetType_PREFAB_LIST][i]));
+		for(rapidxml::xml_node<>* node = doc.first_node()->first_node(); node != NULL; node = node->next_sibling()){
+			std::vector<ComponentPrefab> temp_components;
+			for(rapidxml::xml_node<>* nodei = node->first_node()->first_node();nodei != NULL; nodei = nodei->next_sibling()){
+				for(rapidxml::xml_attribute<>* attr = nodei->first_attribute();attr != NULL;attr = attr->next_attribute()){
+					std::string test_attr(attr->name(),attr->name_size());	
+					if(test_attr.compare("type") == 0){	
+						 std::string test_type(attr->value(),attr->value_size());
+						 if(test_type.compare("sprite") == 0){
+							temp_components.push_back(ComponentPrefab(ComponentType::Sprite,std::string(nodei->value(),nodei->value_size())));
+						 }else
+						 if(test_type.compare("logic") == 0){
+							temp_components.push_back(ComponentPrefab(ComponentType::Logic,std::string(nodei->value(),nodei->value_size())));
+						 }else{
+							std::cout << "Error not component type" << std::endl; 
+						 }
+					}else{
+						std::cout << "Error component type not found" << std::endl;
+					}
+				}	
+			}
+			std::string prefab_name;
+			for(rapidxml::xml_attribute<>* attr = node->first_attribute();attr != NULL;attr=attr->next_attribute()){
+				std::string test_attr(attr->name(),attr->name_size());
+				if(test_attr.compare("name") == 0){	
+					prefab_name = std::string(attr->value(),attr->value_size());
+				}else{
+					std::cout << "Error unknown attribute" << std::endl;	
+				}
+			}
+			std::cout << prefab_name << std::endl;
+			Prefab temp_prefab(prefab_name,temp_components);
+			_prefabs.addObject(prefab_name,temp_prefab);
+		}
+	}
+}
+void AssetManager::loadScenePrefabs(){
+	for(unsigned int i=0;i<_assets[AssetType_SCENE_PREFAB_LIST].size();i++){
+		rapidxml::xml_document<> doc;
+		doc.parse<0>(Tools::loadFile(_assets[AssetType_SCENE_PREFAB_LIST][i]));
+		for(rapidxml::xml_node<>* node = doc.first_node()->first_node(); node != NULL; node = node->next_sibling()){
+			std::vector<Prefab> temp_prefabs;
+			for(rapidxml::xml_node<>* nodei = node->first_node()->first_node();nodei != NULL; nodei = nodei->next_sibling()){
+				int test_index =  _prefabs.checkObject(std::string(nodei->value(),nodei->value_size()));
+				if(test_index == -1){
+					std::cout << "Error Prefab not found" << std::endl;
+				}else{
+					temp_prefabs.push_back(_prefabs.getObject(test_index));
+				}
+			}
+			std::string scene_name;
+			for(rapidxml::xml_attribute<>* attr = node->first_attribute();attr != NULL;attr=attr->next_attribute()){
+				std::string test_attr(attr->name(),attr->name_size());
+				if(test_attr.compare("name") == 0){	
+					scene_name = std::string(attr->value(),attr->value_size());
+				}else{
+					std::cout << "Error unknown attribute" << std::endl;	
+				}
+			}
+			std::cout << scene_name << std::endl;
+			ScenePrefab temp_scene(scene_name,temp_prefabs);
+			_scenePrefabs.addObject(scene_name,temp_scene);
 		}
 	}
 }

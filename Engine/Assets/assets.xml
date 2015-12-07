@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <assets>
 	<sprite_sheet type="sprite_sheet">sprite_sheet.xml</sprite_sheet>
-	<sprites type="sprite_list">sprite_list.xml</settings>
-	<objects type="prefab_list">prefab.xml</objects>
+	<sprites type="sprite_list">sprite_list.xml</sprites>
+	<objects type="prefab_list">prefabs.xml</objects>
+	<scenes type="scene_prefab_list">scene_prefabs.xml</scenes>
 </assets>

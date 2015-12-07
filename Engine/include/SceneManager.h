@@ -1,11 +1,7 @@
 #ifndef SCENE_MANAGER_H
 #define SCENE_MANAGER_H
 #include "Manager.h"
-#include "ObjectManager.h"
-struct ScenePrefab{
-	ScenePrefab(std::vector<Prefab> objects): objects(objects){}
-	std::vector<Prefab> objects;
-};
+#include "Object.h"
 struct Scene{
 	Scene();
 	Scene(std::vector<Object> objects):objects(objects){}

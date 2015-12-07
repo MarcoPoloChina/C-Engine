@@ -1,8 +1,6 @@
-#ifndef OBJECT_MANAGER_H
-#define OBJECT_MANAGER_H
-#include "Tools.h"
+#ifndef OBJECT_H
+#define OBJECT_H
 #include "Messanger.h"
-#include "Manager.h"
 enum class ComponentType{
 	Sprite,
 	Logic,
@@ -30,13 +28,5 @@ struct Prefab {
 		Prefab(std::string name,std::vector<ComponentPrefab> componentPrefabs):_name(name),_componentPrefabs(componentPrefabs){}
 		std::string _name;
 		std::vector<ComponentPrefab> _componentPrefabs;
-};
-class ObjectManager: public Manager{
-	public:
-		ObjectManager(AssetManager* assetManagerPtr,RenderSystem* renderSystemPtr):Manager(assetManagerPtr,renderSystemPtr){}
-		Prefab getPrefab(std::string name);
-	private:
-		void init();
-		std::unordered_map<std::string,Prefab> _prefabs;
 };
 #endif
