@@ -13,6 +13,7 @@ class RenderSystem: public System {
 		virtual void internalAdd(int indexOfRefrence,int index);
 		virtual void internalAdd(std::string name,int index);
 		virtual void internalRemove(int intdex);
+		virtual void internalClear();
 	private:
 		std::vector<Sprite> _sprites;
 		std::vector<Sprite> _currentSprites;

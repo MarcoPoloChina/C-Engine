@@ -2,6 +2,7 @@
 #define SPRITE__H
 #include "Transform.h"
 #include "Tools.h"
+#include "Component.h"
 struct Texture{
 	Texture(int index,std::string path):index(index),path(path){}
 	int index;
@@ -25,13 +26,12 @@ struct Animation{
 	int currentFrame;
 	std::string name;
 };
-class Sprite{ 
+class Sprite: public Component{ 
 	public:
-		Sprite(std::vector<Animation> animations,std::string name="",Transform transform=Transform(),int defaultAnimation=0,int layer=0):active(true),_animations(animations), _name(name), _transform(transform),_defaultAnimation(defaultAnimation),_layer(layer){setCurrentAnimation(defaultAnimation);}
+		Sprite(std::vector<Animation> animations,std::string name="",Transform transform=Transform(),int defaultAnimation=0,int layer=0):_animations(animations), _name(name), _transform(transform),_defaultAnimation(defaultAnimation),_layer(layer){setCurrentAnimation(defaultAnimation);}
 		std::string getName() {return _name;}
 		Animation* getCurrentAnimation() {return &_animations[_currentAnimation];}
 		void setCurrentAnimation(unsigned int index);
-		bool active;
 	private:
 		std::vector<Animation> _animations;
 		std::string _name;

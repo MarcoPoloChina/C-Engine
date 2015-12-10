@@ -2,6 +2,7 @@
 #define MANAGER_H
 #include "AssetManager.h"
 #include "RenderSystem.h"
+#include "LogicSystem.h"
 class Manager{
 	public:
 		Manager(AssetManager* assetManagerPtr,RenderSystem* renderSystemPtr):_assetManagerPtr(assetManagerPtr),_renderSystemPtr(renderSystemPtr){}

@@ -11,10 +11,12 @@ class System {
 		ID genID(int index){return ID(_systemCount,index);}
 		void update(double dt);
 		void remove(int index);
+		void clear();
 		virtual void internalAdd(int indexOfRefrence, int index) =0;
 		virtual void internalAdd(std::string identifier, int index) =0;
 		virtual void internalUpdate(double dt) =0;
 		virtual void internalRemove(int index) =0;
+		virtual void internalClear() =0;
 	private:
 		int determineNextIndex();
 		static int _systemCount;

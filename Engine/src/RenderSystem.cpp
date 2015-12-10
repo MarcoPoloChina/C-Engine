@@ -26,7 +26,10 @@ void RenderSystem::internalUpdate(double dt){
 	}
 }
 void RenderSystem::internalRemove(int index){
-
+	_currentSprites[index].active = false;	
+}
+void RenderSystem::internalClear(){
+	_currentSprites.clear();
 }
 
 

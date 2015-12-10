@@ -255,3 +255,6 @@ void AssetManager::loadScenePrefabs(){
 		}
 	}
 }
+void AssetManager::addLogic(Logic* logic){
+	_logicPointers.addObject(logic->getName(),logic);
+}

@@ -38,3 +38,9 @@ int System::determineNextIndex(){
 	return next_index;
 }
 int System::_systemCount = 0;
+void System::clear(){
+	_top = 0;
+	_freeIndexes.clear();
+	_deleted.clear();
+	internalClear();
+}
