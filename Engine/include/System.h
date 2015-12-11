@@ -8,7 +8,7 @@ class System {
 		System(AssetManager* assetManagerPtr):_assetManagerPtr(assetManagerPtr),_systemIndex(_systemCount++),_top(0){}
 		ID add(int index);
 		ID add(std::string identifier);
-		ID genID(int index){return ID(_systemCount,index);}
+		ID genID(int index){return ID(_systemIndex,index);}
 		void update(double dt);
 		void remove(int index);
 		void clear();

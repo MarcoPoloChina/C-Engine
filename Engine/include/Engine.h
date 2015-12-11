@@ -12,6 +12,7 @@ class Engine{
 		void init();
 		void gameLoop();
 		void addLogic(Logic* logicptr);
+		void makeSystemMap();
 	private:
 		AssetManager _assetManager;
 		RenderSystem _renderSystem;

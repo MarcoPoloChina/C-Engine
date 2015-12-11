@@ -4,11 +4,25 @@ SceneManager::SceneManager(AssetManager* assetManagerPtr,RenderSystem* renderSys
 	setScene(_indexOfCurrentScene);
 }
 void SceneManager::setScene(int index){
+	Tools::PrintDebug(_scenePrefabs[index].name);
 	int scene_index = index;
 	if(index >= _scenePrefabs.size()){
 		scene_index = 0;	
 	}
-	_renderSystemPtr->clear();
+	std::cout << (_currentScene.objects.size());
+	for(int i=0;i<_currentScene.objects.size();i++){
+		std::vector<ID> ids_to_be_deleted = _currentScene.objects[i].getIDs();
+		for(int x=0;x<ids_to_be_deleted.size();x++){
+			switch(ids_to_be_deleted[x].systemIndex){
+				case RENDERSYSTEM :{
+					_renderSystemPtr->remove(ids_to_be_deleted[x].index);
+					break;
+				}
+				case LOGICSYSTEM :{								  
+				}
+			}
+		}
+	}
 	ScenePrefab* temp_scene_prefab = &_scenePrefabs[scene_index];
 	std::vector<Object> objects;
 	for(int i=0;i<temp_scene_prefab->prefabs.size();i++){

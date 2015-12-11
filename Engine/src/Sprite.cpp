@@ -1,7 +1,7 @@
 #include "Sprite.h"
 void Animation::draw(){
 	std::cout << "Current Frame: frame number =" << currentFrame << " x=" << frames[currentFrame].x << " y=" << frames[currentFrame].y << " width=" << frames[currentFrame].width << " height=" << frames[currentFrame].height << std::endl;
-	if(currentFrame < frames.size()){
+	if(currentFrame < frames.size()-1){
 		currentFrame++;	
 	}else{
 		currentFrame = 0;	

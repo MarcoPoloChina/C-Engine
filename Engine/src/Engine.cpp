@@ -3,16 +3,17 @@ Engine::Engine():_renderSystem(RenderSystem(&_assetManager)),_logicSystem(LogicS
 }
 void Engine::gameLoop(){
 	
-	_renderSystem.add(0);
-	_logicSystem.add(0);
 	int frame_counter = 0;
 	while (Status::running){
 		frame_counter++;
 		_renderSystem.update(0.0f);	
 		_logicSystem.update(0.0f);
 		_SDLManager.update();
-		if(frame_counter == 30){
-			_renderSystem.remove(0);	
+		if(frame_counter == 5){
+			_sceneManager.nextScene();
+		}
+		if(frame_counter == 10){
+			Status::running = false;	
 		}
 	}
 }

@@ -10,7 +10,14 @@ class Tools{
 	public:
 		static int genId();
 		static char* loadFile(std::string);
+		static void PrintDebug(std::string);
 	private:
 		static int _id_counter;
+		static bool _debug;
+};
+enum Systems{
+	RENDERSYSTEM,
+	LOGICSYSTEM,
+	END
 };
 #endif

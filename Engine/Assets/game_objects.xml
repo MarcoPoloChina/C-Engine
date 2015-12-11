@@ -1,7 +1,8 @@
-<game_prefab_list>
-	<prefab1 name="test_prefab">
-		<sprite type="sprite_component">test_sprite</sprite>
-		<physics type="physics_component"></physics>
-		<logic type="logic_component">test_logic_component</logic>
-	</prefab1>
-</game_prefab_list>
+<test>
+	<prebab name="test_prefab">
+		<component type="sprite">test_sprite</component>
+	</prebab>
+	<prebab name="test_prefab2">
+		<component type="sprite">test_sprite2</component>
+	</prebab>
+</test>

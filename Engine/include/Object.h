@@ -17,6 +17,7 @@ class Object {
 		Object(std::vector<ID> ids,std::string prefabName):_objectId(_objectCounter++),_ids(ids), _prefabName(prefabName){}
 		std::string getName(){return _prefabName;}
 		ID getComponent(int index){return _ids[index];}
+		std::vector<ID> getIDs(){return _ids;}
 	private:
 		int _objectId;
 		static int _objectCounter;

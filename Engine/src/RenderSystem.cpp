@@ -3,6 +3,7 @@ void RenderSystem::init(){
 	_sprites = _assetManagerPtr->getSprites();
 }
 void RenderSystem::internalAdd(int indexOfRefrence,int index){
+	Tools::PrintDebug("adding sprite");
 	if(index >= _currentSprites.size() || index < 0){
 		_currentSprites.push_back(_sprites[indexOfRefrence]);
 	}else{
@@ -10,6 +11,7 @@ void RenderSystem::internalAdd(int indexOfRefrence,int index){
 	}
 }
 void  RenderSystem::internalAdd(std::string identifier,int index){
+	Tools::PrintDebug("adding sprite");
 	if(index >= _currentSprites.size() || index < 0){
 		_currentSprites.push_back(_sprites[_assetManagerPtr->lookUpSprite(identifier)]);
 	}else{

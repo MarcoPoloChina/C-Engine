@@ -18,7 +18,7 @@ class SceneManager: public Manager{
 		ID genComponent(ComponentPrefab componentPrefab);
 	private:
 		std::vector<ScenePrefab> _scenePrefabs;
-		int _indexOfCurrentScene;
+		int _indexOfCurrentScene;	
 		Scene _currentScene;
 };
 #endif

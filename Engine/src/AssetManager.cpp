@@ -2,8 +2,7 @@
 AssetManager::AssetManager(){
 	init();
 }
-void AssetManager::init(){
-	//loads all of the assets
+void AssetManager::init(){ //loads all of the assets
 	loadAssetsDirectory();
 	loadSpriteSheets();
 	loadSprites();
@@ -76,10 +75,11 @@ void AssetManager::loadSpriteSheets(){
 	for(unsigned int i=0;i<_assets[AssetType_SPRITE_SHEET].size();i++){
 		//load the xml doc
 		rapidxml::xml_document<> doc;
+		Tools::PrintDebug(_assets[AssetType_SPRITE_SHEET][i]);
 		doc.parse<0>(Tools::loadFile(_assets[AssetType_SPRITE_SHEET][i]));
 		//loop of all of the Animation Nodes
 		for(rapidxml::xml_node<>* node = doc.first_node()->first_node();node != NULL;node = node->next_sibling()){
-			std::vector<Frame> frames;
+		std::vector<Frame> frames;
 			//For each animation node loop of all of the frame nodes populating a vector of frames
 			for(rapidxml::xml_node<>* nodei = node->first_node();nodei != NULL;nodei = nodei->next_sibling()){
 				Frame frame;
@@ -100,8 +100,8 @@ void AssetManager::loadSpriteSheets(){
 					}else{
 						std::cout << "Error wrong attribut for frame" << std::endl;	
 					}
-					frames.push_back(frame);
 				}
+				frames.push_back(frame);
 			}
 			//make a temp animation from those frames
 			Animation temp_animation(frames);								
@@ -190,10 +190,11 @@ void AssetManager::loadSprites(){
 void AssetManager::loadPrefabs(){
 	for(unsigned int i=0;i<_assets[AssetType_PREFAB_LIST].size();i++){
 		rapidxml::xml_document<> doc;
+		Tools::PrintDebug(_assets[AssetType_PREFAB_LIST][i]);
 		doc.parse<0>(Tools::loadFile(_assets[AssetType_PREFAB_LIST][i]));
 		for(rapidxml::xml_node<>* node = doc.first_node()->first_node(); node != NULL; node = node->next_sibling()){
 			std::vector<ComponentPrefab> temp_components;
-			for(rapidxml::xml_node<>* nodei = node->first_node()->first_node();nodei != NULL; nodei = nodei->next_sibling()){
+			for(rapidxml::xml_node<>* nodei = node->first_node();nodei != NULL; nodei = nodei->next_sibling()){
 				for(rapidxml::xml_attribute<>* attr = nodei->first_attribute();attr != NULL;attr = attr->next_attribute()){
 					std::string test_attr(attr->name(),attr->name_size());	
 					if(test_attr.compare("type") == 0){	

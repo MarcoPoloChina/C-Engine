@@ -1,6 +1,2 @@
 <prefabs>
-	<object name="test_prefab">
-		<component type="sprite">test_sprite</component>
-		<component type="logic">test_logic.c</component>
-	</object>
 </prefabs>

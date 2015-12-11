@@ -2,4 +2,7 @@
 	<sprite_component name="test_sprite" x="0" y="0" rotation="0" defaultAnimation="test_animation">
 		<animation>test_animation</animation>
 	</sprite_component>
+	<sprite_component name="test_sprite2" x="0" y="0" rotation="0" defaultAnimation="test_animation">
+		<animation>test_animation2</animation>
+	</sprite_component>
 </sprite_list>

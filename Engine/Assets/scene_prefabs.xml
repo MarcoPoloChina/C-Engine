@@ -1,6 +1,8 @@
 <scene_prefabs>
 	<scene name="test_scene">
 		<object>test_prefab</object>	
-		<object>test_prefab</object>	
+	</scene>
+	<scene name="test_scene2">
+		<object>test_prefab2</object>
 	</scene>
 </scene_prefabs>

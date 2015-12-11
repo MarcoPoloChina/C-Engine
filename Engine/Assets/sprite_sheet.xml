@@ -1,15 +1,12 @@
-<spriteSheet source="test.png">
-	<animation name="test_animation" speed="9" repeating="false">
-		<frame x="6000" y="2" width="10" height="10"></frame>	
-		<frame x="1" y="2" width="10" height="10"></frame>	
-		<frame x="1" y="2" width="10" height="10"></frame>	
-		<frame x="1" y="2" width="10" height="10"></frame>	
+<sprite_sheet>
+	<animation name="test_animation" speed="0" source="testSheet.png" repeating="true">
+		<frame x="0" y="0" width="1" height="0"></frame>
+		<frame x="0" y="1" width="0" height="0"></frame>
+		<frame x="1" y="0" width="0" height="0"></frame>
 	</animation>
-	<sprite name="testing2" speed="9" repeating="false">
-		<frame x="6000" y="2" width="10" height="10"></frame>	
-		<frame x="1" y="2" width="10" height="10"></frame>	
-		<frame x="1" y="2" width="10" height="10"></frame>	
-		<frame x="1" y="2" width="10" height="10"></frame>	
+	<animation name="test_animation2" speed="0" source="testSheet.png" repeating="true">
+		<frame x="10000" y="1000" width="1" height="0"></frame>
+		<frame x="0" y="1" width="0" height="0"></frame>
+		<frame x="1" y="0" width="0" height="0"></frame>
 	</animation>
-</spriteSheet>
-
+</sprite_sheet>
